@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CardContainer from './components/CardContainer';
+import ThemeContext from './context/ThemeContext';
 
-function App() {
+const App = () => {
+  const data = [
+    { nombre: 'Termometro de horno', gratis: true },
+    { nombre: 'Dinosario de juguete', gratis: false },
+    { nombre: 'Oso de peluche', gratis: false },
+  ];
+
+const contextoGeneral  = {
+  theme: {
+    titulo: "red"
+  }, 
+  translations: {
+    button: (param) => console.log(param),
+    completar: 'Completar tarea'
+  }
+}
+  const usuarioLogueado = true;
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeContext.Provider value={contextoGeneral}>
+        <CardContainer cards={data} />
+      </ThemeContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
